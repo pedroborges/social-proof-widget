@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte'
 
-	export let url = null
+	export let url
 
 	let events = []
 

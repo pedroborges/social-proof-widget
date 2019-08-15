@@ -8,9 +8,9 @@
 	$: settings = site.settings
 
 	onMount(() => {
-		fetch('http://social-proof.test/site')
+		fetch('https://social-proof.test/api/settings')
 			.then(res => res.json())
-			.then(data => site = data)
+			.then(({ data }) => site = data)
 	})
 
 	const isMobile = () => window.screen.width < 480
@@ -29,7 +29,7 @@
 </script>
 
 {#if settings }
-	<Events url="{site.eventsUrl}" let:events>
+	<Events url="{site.events}" let:events>
 		<Loop
 			items="{events}"
 			rewind="{settings.loop}"
