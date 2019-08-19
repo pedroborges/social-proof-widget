@@ -28,7 +28,7 @@
 		: settings.desktop.position.includes('right')
 </script>
 
-{#if settings }
+{#if settings && isVisible()}
 	<Events url="{site.events}" let:events>
 		<Loop
 			items="{events}"
@@ -44,7 +44,6 @@
 					message="{event.message}"
 					timestamp="{event.created_at}"
 					mobile="{isMobile()}"
-					visible="{isVisible()}"
 					right="{isRight()}"
 					top="{isTop()}"
 					shadow="{settings.shadow}"
