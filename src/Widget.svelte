@@ -41,8 +41,10 @@
 		>
 			{#if event}
 				<Notification
+					image="{event.image_url}"
 					message="{event.message}"
 					timestamp="{event.created_at}"
+					url="{event.url}"
 					mobile="{isMobile()}"
 					right="{isRight()}"
 					top="{isTop()}"

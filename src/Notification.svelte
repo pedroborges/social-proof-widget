@@ -3,14 +3,15 @@
 	import timeago from './utils/timeago'
 
 	export let
+		image = null,
 		message = null,
 		mobile = false,
 		right = true,
 		shadow = true,
 		timestamp = null,
 		top = true,
-		visible = true
-	
+		url = null
+
 	let transition = { y: top ? -40 : 40, duration: 500 }
 </script>
 
@@ -19,13 +20,19 @@
 	transition:fly="{transition}"
 >
 	<div class="overflow-hidden padding">
-		<div
+		<a
+			href="{url}"
 			class="notification"
 			class:border-bottom="{mobile && top}"
 			class:border-top="{mobile && !top}"
 			class:shadow="{shadow}"
 		>
-			<div class="icon"></div>
+			{#if image}
+			<div class="image">
+				<img src="{image}" alt="">
+			</div>
+			{/if}
+
 			<div class="content">
 				{#if message}
 				<span class="message">{@html message}</span>
@@ -35,7 +42,7 @@
 				<span class="time">{timeago(timestamp)}</span>
 				{/if}
 			</div>
-		</div>
+		</a>
 	</div>
 </div>
 
@@ -88,6 +95,7 @@
 	overflow: hidden;
 	background-color: #fff;
 	line-height: 1em;
+	text-decoration: none;
 }
 
 .border-bottom { border-bottom: 1px solid rgba(215, 215, 225, 0.5); }
@@ -107,12 +115,18 @@
 	.left .notification { margin-left: 16px; }
 }
 
-.icon {
+.image {
+	background: gray;
 	border-radius: 50%;
-	width: 56px;
-	height: 56px;
-	background: #90cdf4;
 	box-shadow: rgba(0, 149, 247, 0.4);
+	height: 56px;
+	overflow: hidden;
+	width: 56px;
+}
+
+.image img {
+	height: 100%;
+	width: 100%;
 }
 
 .message {
