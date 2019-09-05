@@ -4,6 +4,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import postcss from 'rollup-plugin-postcss';
+import replace from 'rollup-plugin-replace';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -40,7 +41,12 @@ export default {
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
-		production && terser()
+		production && terser(),
+
+		replace({
+			exclude: 'node_modules/**',
+			API_URL: JSON.stringify(process.env.API_URL || 'https://social-proof.test/api/settings'),
+		}),
 	],
 	watch: {
 		clearScreen: false

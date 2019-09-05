@@ -4,11 +4,13 @@
 	import Loop from './Loop.svelte'
 	import Notification from './Notification.svelte'
 
+	export let api
+
 	let site = {}
 	$: settings = site.settings
 
 	onMount(() => {
-		fetch('https://social-proof.test/api/settings')
+		fetch(api)
 			.then(res => res.json())
 			.then(({ data }) => site = data)
 	})
